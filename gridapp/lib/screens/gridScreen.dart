@@ -101,7 +101,7 @@ class _GridScreenState extends State<GridScreen> {
 
                     newInpiut.contains(alphaList[i]) ? c = true : c = false;
                     c ? gameStart = true : gameStart = false;
-                    /*  if (inputList.length > 2) {
+                   /*  if (inputList.length > 2) {
                       print(alphaIndex - 1);
                       print(secondIndex);
                       if (alphaIndex - 2 == secondIndex && c) {
@@ -113,7 +113,7 @@ class _GridScreenState extends State<GridScreen> {
                       }
                     } */
                     //bool  color=  gameStart && !errorOccur;
-                    return AlphaButton(alphaList[i], c, gameStart, errorOccur);
+                    return AlphaButton(alphaList[i], c, gameStart,errorOccur);
                   }),
             )
           ],
