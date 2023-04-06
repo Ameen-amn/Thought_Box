@@ -106,80 +106,80 @@ class _GridScreenState extends State<GridScreen> {
 
                     newInpiut.contains(alphaList[i]) ? c = true : c = false;
                     c ? gameStart = true : gameStart = false;
-                    /*  if (inputList.length > 2) {
-                      print(alphaIndex - 1);
-                      print(secondIndex);
-                      if (alphaIndex - 2 == secondIndex && c) {
-                        errorOccur = false;
-                        c = true;
-                      } else {
-                        errorOccur = true;
-                        c = false;
-                      }
-                    } */
-                    //bool  color=  gameStart && !errorOccur;
-
-                    ///working //////////////////
-                    /*  if (inputList.length == 1) {
-                      errorOccur = false;
-                      c = true;
-                    } */
-                    if (inputList.length >= 2) {
-                      //ROW CHECKING
-                      if ((lastIndex - secondIndex).abs() < rowNum) {
-                        int rowChecklast = alphaList.indexOf(lastIn);
-                        int rowCheckSecondLast = alpha.indexOf(secondLastIn);
-                        if ((rowChecklast - rowCheckSecondLast).abs() >
-                            rowNum) {
-                          errorOccur = true;
+                    if (secondIndex + 2 != lastIndex) {
+                      if (inputList.length >= 2) {
+                        //DIAGONAL CHECKING
+                        //avoid left ot right
+                        if (lastIndex - secondIndex > colNum) {
                           c = false;
-                        } else if (inputList.length > rowNum) {
                           errorOccur = true;
-                          c = false;
                         }
-                        print("circle value${c}");
-                        print("eror staus${errorOccur}");
-                      }
-                      //COLUMN CHECKING
-                      if ((lastIndex + secondIndex).abs() % colNum == 0) {
-                        int colChecklast = alphaList.indexOf(lastIn);
-                        int colCheckSecondLast = alpha.indexOf(secondLastIn);
-                        if ((colChecklast - colCheckSecondLast).abs() %
-                                colNum !=
+                        //ROW CHECKING
+                        if (secondIndex > lastIndex) {
+                          c = false;
+                          errorOccur = true;
+                        }
+                        if ((lastIndex - secondIndex).abs() < rowNum) {
+                          int rowChecklast = alphaList.indexOf(lastIn);
+                          int rowCheckSecondLast = alpha.indexOf(secondLastIn);
+                          if ((rowChecklast - rowCheckSecondLast).abs() >
+                              rowNum) {
+                            errorOccur = true;
+                            c = false;
+                          } else if (inputList.length > rowNum) {
+                            errorOccur = true;
+                            c = false;
+                          }
+                          /*   print("circle value${c}");
+                        print("eror staus${errorOccur}"); */
+                        }
+                        //COLUMN CHECKING
+                        else if ((lastIndex + secondIndex).abs() % colNum ==
                             0) {
-                          errorOccur = true;
-                          c = false;
-                        } else if (inputList.length > colNum) {
-                          errorOccur = true;
-                          c = false;
+                          int colChecklast = alphaList.indexOf(lastIn);
+                          int colCheckSecondLast = alpha.indexOf(secondLastIn);
+                          if (colCheckSecondLast != colChecklast - colNum) {
+                            errorOccur = true;
+                            c = false;
+                          }
+                          if ((colCheckSecondLast - colChecklast).abs() %
+                                  colNum !=
+                              0) {
+                            errorOccur = true;
+                            c = false;
+                          } else if (inputList.length > colNum) {
+                            errorOccur = true;
+                            c = false;
+                          }
+                          if (lastIndex - secondIndex > colNum) {
+                            errorOccur = true;
+                            c = false;
+                          }
                         }
-                      }
-                      //DIAGONAL CHECKING
-                      int divisor = 0;
+                        /* if (lastIndex%secondIndex==0) {
+                          errorOccur = true;
+                          c = false;
+                        } */
+
+                        /*  int divident = 0;
+                      int diadivident = 0;
                       if (lastIndex > secondIndex) {
-                        divisor = lastIndex;
+                        divident = lastIndex;
                       } else {
-                        divisor = secondIndex;
+                        divident = secondIndex;
                       }
-                      if ((lastIndex - secondIndex).abs() % divisor == 0) {
+                      if (divident % (lastIndex - secondIndex).abs() == 0) {
                         int diaChecklast = alphaList.indexOf(lastIn);
                         int diaCheckSecondLast = alpha.indexOf(secondLastIn);
-                        int diadivisor = 0;
-                        if (diaChecklast < diaCheckSecondLast) {
-                          diadivisor = diaChecklast;
-                          if (diadivisor == 0) {
-                            diadivisor = diaCheckSecondLast;
-                            
-                          }
+
+                        if (diaChecklast > diaCheckSecondLast) {
+                          diadivident = diaChecklast;
                         } else {
-                          diadivisor = diaCheckSecondLast;
-                          if (diadivisor == 0) {
-                            diadivisor = diaChecklast;
-                            
-                          }
+                          diadivident = diaCheckSecondLast;
                         }
-                        if ((diaChecklast - diaCheckSecondLast).abs() %
-                                diadivisor !=
+
+                        if (diadivident %
+                                (diaChecklast - diaCheckSecondLast).abs() !=
                             0) {
                           errorOccur = true;
                           c = false;
@@ -187,9 +187,9 @@ class _GridScreenState extends State<GridScreen> {
                           errorOccur = true;
                           c = false;
                         }
-                      }
+                      } */
 
-                      /* if (lastIndex != 0) {
+                        /* if (lastIndex != 0) {
                         if ((lastIndex - secondIndex).abs() % lastIndex == 0) {
                           int diaChecklast = alphaList.indexOf(lastIn);
                           int diaCheckSecondLast = alpha.indexOf(secondLastIn);
@@ -233,6 +233,7 @@ class _GridScreenState extends State<GridScreen> {
                           }
                         }
                       } */
+                      }
                     }
                     /*  else if (lastIndex % colNum == 0) {
                    }
