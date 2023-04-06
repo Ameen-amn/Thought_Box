@@ -3,11 +3,12 @@ import 'package:gridapp/screens/gridScreen.dart';
 import '../constants.dart';
 
 class HomeScreen extends StatelessWidget {
+  static const routeName = "/HomeScreen";
   HomeScreen({super.key});
   final _formKey = GlobalKey<FormState>();
- final TextEditingController _rowNum = TextEditingController();
- final TextEditingController _colNum = TextEditingController();
- final TextEditingController _alphabets = TextEditingController();
+  final TextEditingController _rowNum = TextEditingController();
+  final TextEditingController _colNum = TextEditingController();
+  final TextEditingController _alphabets = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,6 @@ class HomeScreen extends StatelessWidget {
           )
         ]),
         child: ListView(
-       
           children: [
             const Padding(
               padding: EdgeInsets.only(top: 20),
@@ -51,7 +51,6 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.45,
               width: MediaQuery.of(context).size.width - 40,
-            
               child: Form(
                 key: _formKey,
                 child: Column(
@@ -69,7 +68,7 @@ class HomeScreen extends StatelessWidget {
                               validator: (value) {
                                 if (value!.isEmpty) {
                                   return "Enter the No. of Rows";
-                                } 
+                                }
                               },
                             ),
                           ),
@@ -85,7 +84,7 @@ class HomeScreen extends StatelessWidget {
                               validator: (value) {
                                 if (value!.isEmpty) {
                                   return "Enter the No. of Columns";
-                                } 
+                                }
                               },
                             ),
                           ),
@@ -116,12 +115,13 @@ class HomeScreen extends StatelessWidget {
                           backgroundColor: Colors.black),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          final data=[
+                          final data = [
                             int.parse(_rowNum.text),
-                           int.parse(_colNum.text),
-                           _alphabets.text,
+                            int.parse(_colNum.text),
+                            _alphabets.text,
                           ];
-                          Navigator.of(context).pushNamed(GridScreen.routeName,arguments: data);
+                          Navigator.of(context)
+                              .pushNamed(GridScreen.routeName, arguments: data);
                         }
                       },
                       icon: const Icon(Icons.grid_3x3),

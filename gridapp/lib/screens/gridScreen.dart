@@ -29,9 +29,8 @@ class _GridScreenState extends State<GridScreen> {
     int rowNum = data[0];
     int colNum = data[1];
     String alpha = data[2];
-    List<String> alphaList = alpha.split("");
+    List<String> alphaList = alpha.toUpperCase().split("");
 
-    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -52,31 +51,28 @@ class _GridScreenState extends State<GridScreen> {
               controller: _inputAlpha,
               decoration: kFieldStyle.copyWith(label: const Text("Play text")),
               onChanged: (value) {
-                inputList = value.split("");
-               
+                inputList = value.toUpperCase().split("");
+
                 if (inputList.isNotEmpty) {
                   gameStart = true;
 
                   if (inputList.length == 1) {
                     lastIn = inputList[inputList.length - 1];
-                  
                   }
                   if (inputList.length >= 2) {
-                   
                     lastIn = inputList[inputList.length - 1];
                     secondLastIn = inputList[inputList.length - 2];
                   }
-                 
                 }
                 setState(() {
-                  newInpiut = value;
+                  newInpiut = value.toUpperCase();
                 });
               },
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-               const Icon(Icons.add_box_outlined),
+                const Icon(Icons.add_box_outlined),
                 const Text(
                   "All Direction",
                   textAlign: TextAlign.end,
@@ -111,9 +107,7 @@ class _GridScreenState extends State<GridScreen> {
                     bool rldiaCheck = false;
                     bool lrdiaCheck = false;
 
-             
                     if (inputList.length == 1) {
-                    
                       entry = alphaList.indexOf(lastIn);
                     }
                     if (inputList.length == 2) {
@@ -138,14 +132,14 @@ class _GridScreenState extends State<GridScreen> {
                         }
                         // ROW CHEKING
                         if (rowCheck) {
+                          print("row Check");
                           int rowIndexLast = alphaList.indexOf(lastIn);
                           int rowIndexSecLast = alphaList.indexOf(secondLastIn);
                           if (rowIndexSecLast + 1 != rowIndexLast) {
-                           
                             errorOccur = true;
                             c = false;
                           }
-                      
+
                           if (inputList.length > colNum) {
                             errorOccur = true;
                             c = false;
@@ -155,13 +149,12 @@ class _GridScreenState extends State<GridScreen> {
                             c = false;
                           }
                         }
-                      //COLUMN CHECK
+                        //COLUMN CHECK
                         else if (columnCheck) {
-                       
                           int colLastIndex = alphaList.indexOf(lastIn);
                           int colSecondLastIndex =
                               alphaList.indexOf(secondLastIn);
-                      
+
                           if (colLastIndex - colSecondLastIndex != colNum) {
                             errorOccur = true;
                             c = false;
@@ -173,7 +166,6 @@ class _GridScreenState extends State<GridScreen> {
                         }
                         //Diagonal Checking right to left
                         else if (rldiaCheck) {
-                       
                           int diaLastIndex = alphaList.indexOf(lastIn);
                           int diaSecondLastIndex =
                               alphaList.indexOf(secondLastIn);
@@ -210,7 +202,6 @@ class _GridScreenState extends State<GridScreen> {
                           int rowIndexLast = alphaList.indexOf(lastIn);
                           int rowIndexSecLast = alphaList.indexOf(secondLastIn);
                           if ((rowIndexLast - rowIndexSecLast).abs() != 1) {
-                            
                             errorOccur = true;
                             c = false;
                           }
@@ -219,9 +210,7 @@ class _GridScreenState extends State<GridScreen> {
                             errorOccur = true;
                             c = false;
                           }
-                        }
-                        
-                        else if (columnCheck) {
+                        } else if (columnCheck) {
                           int colLastIndex = alphaList.indexOf(lastIn);
                           int colSecondLastIndex =
                               alphaList.indexOf(secondLastIn);
