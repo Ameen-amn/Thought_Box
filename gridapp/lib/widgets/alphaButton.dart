@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class AlphaButton extends StatelessWidget {
   bool isCircle = false;
-  bool gameStart;
-  String alphabet;
-  bool errorOccur;
+  final bool gameStart;
+  final String alphabet;
+  final bool errorOccur;
   AlphaButton(this.alphabet, this.isCircle, this.gameStart, this.errorOccur,
       {super.key});
 

@@ -5,9 +5,9 @@ import '../constants.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
   final _formKey = GlobalKey<FormState>();
-  TextEditingController _rowNum = TextEditingController();
-  TextEditingController _colNum = TextEditingController();
-  TextEditingController _alphabets = TextEditingController();
+ final TextEditingController _rowNum = TextEditingController();
+ final TextEditingController _colNum = TextEditingController();
+ final TextEditingController _alphabets = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
           )
         ]),
         child: ListView(
-          // crossAxisAlignment: CrossAxisAlignment.center,
+       
           children: [
             const Padding(
               padding: EdgeInsets.only(top: 20),
@@ -48,10 +48,10 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
+            SizedBox(
               height: MediaQuery.of(context).size.height * 0.45,
               width: MediaQuery.of(context).size.width - 40,
-              // color: Colors.black,
+            
               child: Form(
                 key: _formKey,
                 child: Column(
@@ -69,9 +69,7 @@ class HomeScreen extends StatelessWidget {
                               validator: (value) {
                                 if (value!.isEmpty) {
                                   return "Enter the No. of Rows";
-                                } /* else if (_colNum.text != _rowNum.text) {
-                                  return "Col & Row No. not equal ";
-                                } */
+                                } 
                               },
                             ),
                           ),
@@ -87,9 +85,7 @@ class HomeScreen extends StatelessWidget {
                               validator: (value) {
                                 if (value!.isEmpty) {
                                   return "Enter the No. of Columns";
-                                } /* else if (_colNum.text != _rowNum.text) {
-                                  return "Col & Row No. not equal ";
-                                } */
+                                } 
                               },
                             ),
                           ),
