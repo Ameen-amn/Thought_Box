@@ -19,7 +19,6 @@ class _GridScreenState extends State<GridScreen> {
   String lastIn = '';
   String secondLastIn = "";
   bool gameStart = false;
-  bool errorOccur = false;
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +65,8 @@ class _GridScreenState extends State<GridScreen> {
                 String lastInput = "";
                 if (inputList.isNotEmpty) {
                   gameStart = true;
-                  lastIn = inputList[inputList.length - 1];
                   if (inputList.length >= 2) {
+                    lastIn = inputList[inputList.length - 1];
                     secondLastIn = inputList[inputList.length - 2];
                   }
                   print(inputList);
@@ -91,17 +90,23 @@ class _GridScreenState extends State<GridScreen> {
                   itemBuilder: (BuildContext, i) {
                     bool c = false;
                     int newIndex = newInpiut.indexOf(lastIn);
+                    int secondIndex = 0;
+                    int lastIndex = 0;
+                    bool errorOccur = false;
                     //new Mehtod
-                    int secondIndex = alphaList.indexOf(secondLastIn);
-                    int alphaIndex = alphaList.indexOf(lastIn);
-                    if (alphaIndex / colNum < 0) {}
+                    if (inputList.length == 2) {
+                      secondIndex = alphaList.indexOf(secondLastIn);
+                      lastIndex = alphaList.indexOf(lastIn);
+                    }
+                    //  print("fisrst, second ${lastIndex} ${secondIndex}");
+                    //if (alphaIndex / colNum < 0) {}
                     //test Area over
                     /************ */
                     //  alphaList[i] == lastIn ? c[i] = true : c[i] = false;
 
                     newInpiut.contains(alphaList[i]) ? c = true : c = false;
                     c ? gameStart = true : gameStart = false;
-                   /*  if (inputList.length > 2) {
+                    /*  if (inputList.length > 2) {
                       print(alphaIndex - 1);
                       print(secondIndex);
                       if (alphaIndex - 2 == secondIndex && c) {
@@ -113,7 +118,138 @@ class _GridScreenState extends State<GridScreen> {
                       }
                     } */
                     //bool  color=  gameStart && !errorOccur;
-                    return AlphaButton(alphaList[i], c, gameStart,errorOccur);
+
+                    ///working //////////////////
+                    /*  if (inputList.length == 1) {
+                      errorOccur = false;
+                      c = true;
+                    } */
+                    if (inputList.length >= 2) {
+                      //ROW CHECKING
+                      if ((lastIndex - secondIndex).abs() < rowNum) {
+                        int rowChecklast = alphaList.indexOf(lastIn);
+                        int rowCheckSecondLast = alpha.indexOf(secondLastIn);
+                        if ((rowChecklast - rowCheckSecondLast).abs() >
+                            rowNum) {
+                          errorOccur = true;
+                          c = false;
+                        } else if (inputList.length > rowNum) {
+                          errorOccur = true;
+                          c = false;
+                        }
+                        print("circle value${c}");
+                        print("eror staus${errorOccur}");
+                      }
+                      //COLUMN CHECKING
+                      if ((lastIndex + secondIndex).abs() % colNum == 0) {
+                        int colChecklast = alphaList.indexOf(lastIn);
+                        int colCheckSecondLast = alpha.indexOf(secondLastIn);
+                        if ((colChecklast - colCheckSecondLast).abs() %
+                                colNum !=
+                            0) {
+                          errorOccur = true;
+                          c = false;
+                        } else if (inputList.length > colNum) {
+                          errorOccur = true;
+                          c = false;
+                        }
+                      }
+                      //DIAGONAL CHECKING
+                      int divisor = 0;
+                      if (lastIndex > secondIndex) {
+                        divisor = lastIndex;
+                      } else {
+                        divisor = secondIndex;
+                      }
+                      if ((lastIndex - secondIndex).abs() % divisor == 0) {
+                        int diaChecklast = alphaList.indexOf(lastIn);
+                        int diaCheckSecondLast = alpha.indexOf(secondLastIn);
+                        int diadivisor = 0;
+                        if (diaChecklast < diaCheckSecondLast) {
+                          diadivisor = diaChecklast;
+                          if (diadivisor == 0) {
+                            diadivisor = diaCheckSecondLast;
+                            
+                          }
+                        } else {
+                          diadivisor = diaCheckSecondLast;
+                          if (diadivisor == 0) {
+                            diadivisor = diaChecklast;
+                            
+                          }
+                        }
+                        if ((diaChecklast - diaCheckSecondLast).abs() %
+                                diadivisor !=
+                            0) {
+                          errorOccur = true;
+                          c = false;
+                        } else if (inputList.length > colNum) {
+                          errorOccur = true;
+                          c = false;
+                        }
+                      }
+
+                      /* if (lastIndex != 0) {
+                        if ((lastIndex - secondIndex).abs() % lastIndex == 0) {
+                          int diaChecklast = alphaList.indexOf(lastIn);
+                          int diaCheckSecondLast = alpha.indexOf(secondLastIn);
+                          if (diaChecklast != 0) {
+                            if ((diaChecklast - diaCheckSecondLast).abs() %
+                                    diaChecklast !=
+                                0) {
+                              errorOccur = true;
+                              c = false;
+                            }
+                          } else if ((diaChecklast - diaCheckSecondLast).abs() %
+                                  diaCheckSecondLast !=
+                              0) {
+                            errorOccur = true;
+                            c = false;
+                          } else if (inputList.length > colNum) {
+                            errorOccur = true;
+                            c = false;
+                          }
+                        }
+                      } else {
+                        if ((lastIndex - secondIndex).abs() % secondIndex ==
+                            0) {
+                          int diaChecklast = alphaList.indexOf(lastIn);
+                          int diaCheckSecondLast = alpha.indexOf(secondLastIn);
+                          if (diaChecklast != 0) {
+                            if ((diaChecklast - diaCheckSecondLast).abs() %
+                                    diaChecklast !=
+                                0) {
+                              errorOccur = true;
+                              c = false;
+                            }
+                          } else if ((diaChecklast - diaCheckSecondLast).abs() %
+                                  diaCheckSecondLast !=
+                              0) {
+                            errorOccur = true;
+                            c = false;
+                          } else if (inputList.length > colNum) {
+                            errorOccur = true;
+                            c = false;
+                          }
+                        }
+                      } */
+                    }
+                    /*  else if (lastIndex % colNum == 0) {
+                   }
+                      print("col checking");
+                      int colChecklast = alphaList.indexOf(lastIn);
+                      int colCheckSecondLast = alpha.indexOf(secondLastIn);
+                      if (colCheckSecondLast + colChecklast < colNum) {
+                        errorOccur = true;
+                        c = false;
+                      }
+                      if (inputList.length - 1 > colNum) {
+                        errorOccur = true;
+                        c = false;
+                      }
+                    } */
+
+                    return AlphaButton(alphaList[i], c, gameStart, errorOccur);
                   }),
             )
           ],

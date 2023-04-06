@@ -13,7 +13,7 @@ class AlphaButton extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           color: gameStart
-              ? isCircle
+              ? isCircle && !errorOccur
                   ? Colors.green[300]
                   : Colors.red
               : Colors.blue[100],
