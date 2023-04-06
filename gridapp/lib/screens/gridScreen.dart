@@ -123,6 +123,9 @@ class _GridScreenState extends State<GridScreen> {
                       if (inputList.length >= 2) {
                         if (lastIndex - secondIndex == 1) {
                           rowCheck = true;
+                        } else if (lastIndex - secondIndex < colNum) {
+                          errorOccur = true;
+                          c = false;
                         } else if ((lastIndex - secondIndex) % colNum == 0) {
                           columnCheck = true;
                         } else if (rowNum == colNum) {
